@@ -5,7 +5,12 @@ var Router = require('react-router');
 var Index = React.createClass({
 	md : new MobileDetect(window.navigator.userAgent),
 	login:function(e){
-		console.log('123')
+		if( !this.state.name || !this.state.phone) {
+			alert('聯絡電話跟名字都必須填喔。');
+			return false;
+		}
+		console.log(this.state.name);
+		console.log(this.state.phone);
 		return false;
 	},
   	getInitialState: function() {
