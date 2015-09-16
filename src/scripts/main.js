@@ -19,7 +19,7 @@ var DefaultRoute = Router.DefaultRoute;
 var routes = (
   <Route handler={App} path="/">
     <DefaultRoute handler={Index}/>
-    <Route name="home" path="home" handler={Home}/>
+    <Route name="home" path="home/:userName" handler={Home}/>
   </Route>
 );
 

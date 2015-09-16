@@ -9,9 +9,6 @@ var Index = React.createClass({
 			alert('聯絡電話跟名字都必須填喔。');
 			return false;
 		}
-		console.log(this.state.name);
-		console.log(this.state.phone);
-		return false;
 	},
   	getInitialState: function() {
     	return {
@@ -47,7 +44,7 @@ var Index = React.createClass({
 		    </div>
 			<div className='row'>
 		        <div className="col-xs-4 col-xs-offset-4 logo">
-		        	<Link to="home" onClick={this.login}>Login</Link>
+		        	<Link to="home" params={{userName: this.state.name, userPhone:this.state.phone }} onClick={this.login} >Login</Link>
 	    		</div>
 	    	</div>
 		</div>
