@@ -1,6 +1,7 @@
 var React = require('react');
 var Link = require('react-router').Link;
 var Router = require('react-router');
+var AppActions = require('../actions/AppActions.js');
 
 var Index = React.createClass({
 	md : new MobileDetect(window.navigator.userAgent),
@@ -9,6 +10,10 @@ var Index = React.createClass({
 			alert('聯絡電話跟名字都必須填喔。');
 			return false;
 		}
+		AppActions.createUser({
+			name:this.state.name,
+			phone:this.state.phone
+		});
 	},
   	getInitialState: function() {
     	return {
@@ -44,7 +49,7 @@ var Index = React.createClass({
 		    </div>
 			<div className='row'>
 		        <div className="col-xs-4 col-xs-offset-4 logo">
-		        	<Link to="home" params={{userName: this.state.name, userPhone:this.state.phone }} onClick={this.login} >Login</Link>
+		        	<Link to="home" onClick={this.login} >Login</Link>
 	    		</div>
 	    	</div>
 		</div>

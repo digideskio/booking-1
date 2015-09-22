@@ -3,36 +3,50 @@
   "version": "1.0.0",
   "description": "",
   "main": "build/bundle.js",
+  "author": "JackChan",
+  "license": "ISC",
   "dependencies": {
     "flux": "^2.0.3",
     "object-assign": "^2.0.0",
     "react": "^0.13.3",
-    "react-router": "^0.13.3"
+    "react-router": "^0.13.3",
+    "bootstrap": "^3.3.5",
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "babel-core": "^5.8.22",
     "babel-loader": "^5.3.2",
-    "bootstrap": "^3.3.5",
+    "babel-plugin-react-transform": "^1.0.1",
     "bootstrap-webpack": "0.0.3",
     "css-loader": "^0.16.0",
     "file-loader": "^0.8.4",
     "imports-loader": "^0.6.4",
-    "jquery": "^2.1.4",
     "node-sass": "^3.2.0",
     "react-hot-loader": "^1.2.9",
     "react-tools": "^0.13.3",
     "sass-loader": "^2.0.1",
     "style-loader": "^0.12.3",
     "url-loader": "^0.5.6",
+    "rimraf": "^2.3.4",
+    "extract-text-webpack-plugin": "^0.8.1",
+    "react-transform-catch-errors": "^0.1.1",
+    "react-transform-webpack-hmr": "^0.1.2",
+    "redbox-react": "^1.0.1",
+    "express": "^4.13.3",
     "webpack": "^1.11.0",
     "webpack-dev-middleware": "^1.2.0",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-server": "^1.10.1",
+    "webpack-hot-middleware": "^2.0.0"
   },
   "scripts": {
+    "start": "node server.js",
     "build": "webpack --config webpack.config.js",
     "dev": "webpack-dev-server --devtool eval --config webpack.config.js --colors --content-base ./build",
     "test": ""
   },
-  "author": "JackChan",
-  "license": "ISC"
+  "vendors": [
+    "react",
+    "jquery",
+    "bootstrap"
+  ]
 }

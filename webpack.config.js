@@ -1,23 +1,38 @@
+var path = require('path');
 var webpack = require('webpack');
-
+var pkg = require('./package.json');
+var  buildPath = path.resolve(__dirname, 'build');
 module.exports = {
-  entry: {
-    app: [
-      "webpack-dev-server/client?http://0.0.0.0:8080",
-      "webpack/hot/only-dev-server",
-      "./src/scripts/main.js"
-    ]
-  },
+  devtool: 'eval',
+  // entry: {
+  //   app: [
+  //     "webpack-dev-server/client?http://0.0.0.0:8080",
+  //     "webpack/hot/only-dev-server",
+  //     "./src/scripts/main.js"
+  //   ]
+  // },
+  entry: [
+    "webpack-hot-middleware/client",
+    "./src/scripts/main.js"
+  ],
   output: {
-    path: "./build",
-    filename: "bundle.js"
+    path: buildPath,
+    filename: "bundle.js",
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoErrorsPlugin(),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery',
+      'window.jQuery': 'jquery',
+      'root.jQuery': 'jquery'
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.bundle.js', Infinity)
   ],
   resolve: {
-    modulesDirectories: ['node_modules'],
+    modulesDirectories: ['node_modules']
   },
   externals: {
     "mobile-detect": 'MobileDetect'

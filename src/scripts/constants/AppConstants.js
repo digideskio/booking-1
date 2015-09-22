@@ -25,7 +25,7 @@ module.exports = keyMirror({
 
   	CHANGE_EVENT: null,
   	
-  	TODO_CREATE: null,
+  	USER_CREATE: null,
   	
     TODO_REMOVE: null,
   	

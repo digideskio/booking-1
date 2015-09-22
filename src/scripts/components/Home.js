@@ -1,18 +1,18 @@
 var React = require('react');
-
+var AppActions = require('../actions/AppActions.js');
+var UserStore = require('../stores/UserStore.js');
 var Home = React.createClass({
   	getInitialState: function() {
+  		var user = UserStore.getInfo().currentUser;
     	return {
-    		userName: this.props.params.userName,
-    		userPhone: this.props.params.userPhone
+    		userName: user.name,
+    		userPhone: user.phone
     	};
   	},
 	render: function () {
 	    return (
-	    	<div>
-	    		<h2>Home</h2>
-	    		<h2>{this.state.userName}</h2>
-	    		<h2>{this.state.userPhone}</h2>
+	    	<div className = "wrapper">
+	    		
 	    	</div>
     	);
 	}
