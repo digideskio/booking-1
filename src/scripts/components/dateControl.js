@@ -36,10 +36,14 @@ var currentDate = (function(){
 var DateControl = React.createClass({
   	getInitialState: function() {
 
-      return {
-        currentDate : "123"
+      var state = {
+        year : currentDate.year,
+        month : currentDate.month,
+        day : currentDate.day,
+        today : currentDate.today
       }
-    	// return state;
+
+    	return currentDate;
   	},
 	render: function () {
 	    return (
@@ -61,7 +65,7 @@ var DateControl = React.createClass({
                               </div>
                           </td>
                           <td className="dateBox">
-                              <div className="currentDate"> 2015年9月18日 星期五 {this.state.currentDate}</div>
+                              <div className="currentDate">{this.state.year}年{this.state.month}月{this.state.day}日 {this.state.today}</div>
                           </td>
                       </tr>
                   </tbody>

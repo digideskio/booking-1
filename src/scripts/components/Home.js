@@ -2,6 +2,8 @@ var React = require('react');
 var AppActions = require('../actions/AppActions.js');
 var UserStore = require('../stores/UserStore.js');
 var DateControl = require('../components/dateControl.js');
+var DateTable = require('../components/dateTable.js');
+
 
 var getAppState = function getAppState() {
   var state = {};
@@ -21,7 +23,8 @@ var Home = React.createClass({
 	    return (
         <div className="home">
   	    	<div className = "wrapper">
-            <DateControl/>  	
+            <DateControl/>
+            <DateTable/>
         </div>
       </div>
     	);
