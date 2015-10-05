@@ -4,7 +4,6 @@ var UserStore = require('../stores/UserStore.js');
 
 var DateControl = React.createClass({
     getInitialState: function() {
-        // var currentDate = this.currentDate();
         var state = {
             year : this.props.date.year,
             month : this.props.date.month,
@@ -13,30 +12,73 @@ var DateControl = React.createClass({
         }
         return state;
     },
+    showDay : function(){
+        var dates = [];
+        var first = {
+            year : this.props.date.year,
+            month : this.props.date.month,
+            date : this.props.date.date,
+            today : this.props.date.today.replace("星期", "(") + ")"
+        }
+        dates.push(first);
+        if(this.props.showDay){
+            var second = this.props.showDay({
+                today : first,
+                action : "next"
+            });
+            dates.push(second);
+
+            second.today = second.today.replace("星期", "(") + ")";
+            var third = this.props.showDay({
+                today : second,
+                action : "next"
+            });
+            dates.push(third);
+
+            third.today = third.today.replace("星期", "(") + ")";
+            var fourth = this.props.showDay({
+                today : third,
+                action : "next"
+            });
+            dates.push(fourth);
+
+            fourth.today = fourth.today.replace("星期", "(") + ")";
+            var fifth = this.props.showDay({
+                today : fourth,
+                action : "next"
+            });
+            dates.push(fifth);
+
+            fifth.today = fifth.today.replace("星期", "(") + ")";
+            var sixth = this.props.showDay({
+                today : fifth,
+                action : "next"
+            });
+            dates.push(sixth);
+
+            sixth.today = sixth.today.replace("星期", "(") + ")";
+            var seventh = this.props.showDay({
+                today : sixth,
+                action : "next"
+            });
+            seventh.today = seventh.today.replace("星期", "(") + ")";
+            dates.push(seventh);
+
+            console.log(dates);
+        }
+
+        var dateHtml = dates.map(function(e,index){
+            return (<th  key={index}>
+                    <span className="dayname"> {e.month}/{e.date}{e.today} </span>
+                </th>
+                )
+        }, this);
+        return dateHtml;
+    },
 	render: function () {
 	    return (
             <tr className="days">
-                <th>
-                    <span className="dayname">{this.state.today}</span>
-                </th>
-                <th>
-                    <span className="dayname">9/15 (週二)</span>
-                </th>
-                <th>
-                    <span className="dayname">9/16 (週三)</span>
-                </th>
-                <th>
-                    <span className="dayname">9/17 (週四)</span>
-                </th>
-                <th>
-                    <span className="dayname">9/18 (週五)</span>
-                </th>
-                <th>
-                    <span className="dayname">9/19 (週六)</span>
-                </th>
-                <th>
-                  <span className="dayname">9/20 (週日)</span>
-                </th>
+                {this.showDay()}
             </tr>
     	);
 	}

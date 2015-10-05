@@ -72,193 +72,197 @@ var Home = React.createClass({
         }
     	return state;
   	},
-    nextDay : function(){
-        var dayIndex = this.mapToday(this.state.date.today);
-        var dateIndex =  this.state.date.date;
-        var monthIndex = this.state.date.month;
-        var yearIndex = this.state.date.year;
+    showDay : function(opts){
+        if(opts.action  == "next"){
+            if(opts.today){
+                var yearIndex = opts.today.year;
+                var monthIndex = opts.today.month;
+                var dateIndex = opts.today.date; 
+                var dayIndex = this.mapToday(opts.today.today.replace("(", "星期").replace(")",""));
+            }else{
+                var yearIndex = this.state.date.year;
+                var monthIndex = this.state.date.month;
+                var dateIndex = this.state.date.date; 
+                var dayIndex = this.mapToday(this.state.date.today);   
+            }
 
-        switch (monthIndex) {
-            case 1:
-            case 3:
-            case 5:
-            case 7:
-            case 8:
-            case 10:
-            case 12:
-                if(dateIndex == 31){
-                    dateIndex = 1;
-                    if(monthIndex==12){
-                        monthIndex = 1;
-                        yearIndex += 1;
+            switch (monthIndex) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    if(dateIndex == 31){
+                        dateIndex = 1;
+                        if(monthIndex==12){
+                            monthIndex = 1;
+                            yearIndex += 1;
+                        }else{
+                            monthIndex += 1;
+                        }
                     }else{
-                        monthIndex += 1;
+                        dateIndex += 1;
                     }
-                }else{
-                    dateIndex += 1;
-                }
-                break;
-            case 4:
-            case 6:
-            case 9:
-            case 11:
-                if(dateIndex == 30){
-                    dateIndex = 1;
-                    monthIndex += 1;
-                }else{
-                    dateIndex += 1;
-                }
-                break;
-            case 2:
-                if(yearIndex % 4 == 0 ){
-                    if(dateIndex == 29){
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if(dateIndex == 30){
                         dateIndex = 1;
                         monthIndex += 1;
                     }else{
                         dateIndex += 1;
                     }
-                    if(yearIndex % 100 == 0){
-                        if(yearIndex % 400 == 0){
-                            if(dateIndex == 29){
-                                dateIndex = 1;
-                                monthIndex += 1;
-                            }else{
-                                dateIndex += 1;
-                            }
+                    break;
+                case 2:
+                    if(yearIndex % 4 == 0 ){
+                        if(dateIndex == 29){
+                            dateIndex = 1;
+                            monthIndex += 1;
                         }else{
-                            if(dateIndex == 28){
-                                dateIndex = 1;
-                                monthIndex += 1;
+                            dateIndex += 1;
+                        }
+                        if(yearIndex % 100 == 0){
+                            if(yearIndex % 400 == 0){
+                                if(dateIndex == 29){
+                                    dateIndex = 1;
+                                    monthIndex += 1;
+                                }else{
+                                    dateIndex += 1;
+                                }
                             }else{
-                                dateIndex += 1;
+                                if(dateIndex == 28){
+                                    dateIndex = 1;
+                                    monthIndex += 1;
+                                }else{
+                                    dateIndex += 1;
+                                }
                             }
                         }
-                    }
-                }else{
-                    if(dateIndex == 28){
-                        dateIndex = 1;
-                        monthIndex += 1;
                     }else{
-                        dateIndex += 1;
+                        if(dateIndex == 28){
+                            dateIndex = 1;
+                            monthIndex += 1;
+                        }else{
+                            dateIndex += 1;
+                        }
                     }
-                }
-                break;
-        }
+                    break;
+            }
 
-        if(dayIndex  === 6 ){
-            dayIndex = 0;
-        }else{
-            dayIndex += 1;
-        }
+            if(dayIndex  === 6 ){
+                dayIndex = 0;
+            }else{
+                dayIndex += 1;
+            }
 
-        var date = {
-            year : yearIndex,
-            month : monthIndex,
-            date : dateIndex,
-            today : this.mapToday(dayIndex)
-        }
-
-        this.setState({
-            date :{
+            return {
                 year : yearIndex,
                 month : monthIndex,
                 date : dateIndex,
-                today : this.mapToday(dayIndex)         
+                today : this.mapToday(dayIndex)
+            };
+
+        }else if (opts.action == "last"){
+            var dayIndex = this.mapToday(this.state.date.today);
+            var dateIndex =  this.state.date.date;
+            var monthIndex = this.state.date.month;
+            var yearIndex = this.state.date.year;
+            
+            switch (monthIndex) {
+                case 5:
+                case 7:
+                case 10:
+                case 12:
+                    if(dateIndex == 1){
+                        dateIndex = 30;
+                        monthIndex -= 1;
+                    }else{
+                        dateIndex -= 1;
+                    }
+                    break;
+                case 1:
+                case 2:
+                case 4:
+                case 6:
+                case 8:
+                case 9:
+                case 11:
+                    if(dateIndex == 1){
+                        dateIndex = 31;
+                        if(monthIndex==1){
+                            monthIndex = 12;
+                            yearIndex -= 1;
+                        }else{
+                            monthIndex -= 1;
+                        }
+                    }else{
+                        dateIndex -= 1;
+                    }
+                    break;
+                case 3:
+                    if(yearIndex % 4 == 0 ){
+                        if(dateIndex == 1){
+                            dateIndex = 29;
+                            monthIndex -= 1;
+                        }else{
+                            dateIndex -= 1;
+                        }
+                        if(yearIndex % 100 == 0){
+                            if(yearIndex % 400 == 0){
+                                if(dateIndex == 1){
+                                    dateIndex = 29;
+                                    monthIndex -= 1;
+                                }else{
+                                    dateIndex -= 1;
+                                }
+                            }else{
+                                if(dateIndex == 1){
+                                    dateIndex = 28;
+                                    monthIndex -= 1;
+                                }else{
+                                    dateIndex -= 1;
+                                }
+                            }
+                        }
+                    }else{
+                        if(dateIndex == 1){
+                            dateIndex = 28;
+                            monthIndex -= 1;
+                        }else{
+                            dateIndex -= 1;
+                        }
+                    }
+                    break;
             }
+
+            if(dayIndex  === 0 ){
+                dayIndex = 6;
+            }else{
+                dayIndex -= 1;
+            }
+            return {
+                year : yearIndex,
+                month : monthIndex,
+                date : dateIndex,
+                today : this.mapToday(dayIndex)
+            };
+        }
+    },
+    nextDay : function(){
+        var date = this.showDay({action:"next"});
+        this.setState({
+            date : date
         });
         return date;
     },
     lastDay : function(){
-        var dayIndex = this.mapToday(this.state.date.today);
-        var dateIndex =  this.state.date.date;
-        var monthIndex = this.state.date.month;
-        var yearIndex = this.state.date.year;
-        switch (monthIndex) {
-            case 5:
-            case 7:
-            case 10:
-            case 12:
-                if(dateIndex == 1){
-                    dateIndex = 30;
-                    monthIndex -= 1;
-                }else{
-                    dateIndex -= 1;
-                }
-                break;
-            case 1:
-            case 2:
-            case 4:
-            case 6:
-            case 8:
-            case 9:
-            case 11:
-                if(dateIndex == 1){
-                    dateIndex = 31;
-                    if(monthIndex==1){
-                        monthIndex = 12;
-                        yearIndex -= 1;
-                    }else{
-                        monthIndex -= 1;
-                    }
-                }else{
-                    dateIndex -= 1;
-                }
-                break;
-            case 3:
-                if(yearIndex % 4 == 0 ){
-                    if(dateIndex == 1){
-                        dateIndex = 29;
-                        monthIndex -= 1;
-                    }else{
-                        dateIndex -= 1;
-                    }
-                    if(yearIndex % 100 == 0){
-                        if(yearIndex % 400 == 0){
-                            if(dateIndex == 1){
-                                dateIndex = 29;
-                                monthIndex -= 1;
-                            }else{
-                                dateIndex -= 1;
-                            }
-                        }else{
-                            if(dateIndex == 1){
-                                dateIndex = 28;
-                                monthIndex -= 1;
-                            }else{
-                                dateIndex -= 1;
-                            }
-                        }
-                    }
-                }else{
-                    if(dateIndex == 1){
-                        dateIndex = 28;
-                        monthIndex -= 1;
-                    }else{
-                        dateIndex -= 1;
-                    }
-                }
-                break;
-        }
-
-        if(dayIndex  === 0 ){
-            dayIndex = 6;
-        }else{
-            dayIndex -= 1;
-        }
-        var date = {
-            year : yearIndex,
-            month : monthIndex,
-            date : dateIndex,
-            today : this.mapToday(dayIndex)
-        }
-
+        var date = this.showDay({action:"last"});
         this.setState({
-            date :{
-                year : yearIndex,
-                month : monthIndex,
-                date : dateIndex,
-                today : this.mapToday(dayIndex)         
-            }
+            date : date
         });
         return date;
     },
@@ -291,7 +295,7 @@ var Home = React.createClass({
                     </div>
                     <div id="nowptr" className="tg-nowptr"></div>
                 </div>
-                <DateTable date = {this.state.date}/>
+                <DateTable date = {this.state.date} showDay = {this.showDay} />
             </div>
         </div>
       );
