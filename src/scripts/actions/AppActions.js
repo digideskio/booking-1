@@ -25,7 +25,15 @@ var AppActionCreators = {
             item: user
         });
     },
-    noop: function(){}
+    /**
+     * 
+     */
+    saveDates: function( dates ){
+        AppDispatcher.handleViewAction({
+            actionType: AppConstants.SAVE,
+            item: dates
+        });
+    }
 };
 
 module.exports = AppActionCreators;

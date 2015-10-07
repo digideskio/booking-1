@@ -12,6 +12,7 @@ var DateControl = React.createClass({
         }
         return state;
     },
+    datesToStore:[],
     showDay : function(){
         var dates = [];
         var first = {
@@ -22,52 +23,24 @@ var DateControl = React.createClass({
         }
         dates.push(first);
         if(this.props.showDay){
-            var second = this.props.showDay({
-                today : first,
-                action : "next"
-            });
-            dates.push(second);
-
-            second.today = second.today.replace("星期", "(") + ")";
-            var third = this.props.showDay({
-                today : second,
-                action : "next"
-            });
-            dates.push(third);
-
-            third.today = third.today.replace("星期", "(") + ")";
-            var fourth = this.props.showDay({
-                today : third,
-                action : "next"
-            });
-            dates.push(fourth);
-
-            fourth.today = fourth.today.replace("星期", "(") + ")";
-            var fifth = this.props.showDay({
-                today : fourth,
-                action : "next"
-            });
-            dates.push(fifth);
-
-            fifth.today = fifth.today.replace("星期", "(") + ")";
-            var sixth = this.props.showDay({
-                today : fifth,
-                action : "next"
-            });
-            dates.push(sixth);
-
-            sixth.today = sixth.today.replace("星期", "(") + ")";
-            var seventh = this.props.showDay({
-                today : sixth,
-                action : "next"
-            });
-            seventh.today = seventh.today.replace("星期", "(") + ")";
-            dates.push(seventh);
-
+            for(var loopIndex = 1;loopIndex<7;loopIndex++){
+                dates[loopIndex] = (function(loopIndex){
+                    return this.props.showDay({
+                        today : dates[loopIndex - 1],
+                        action : "next"
+                    });  
+                }.bind(this,loopIndex)());
+                dates[loopIndex].today = dates[loopIndex].today.replace("星期", "(") + ")";
+            }
             console.log(dates);
         }
 
         var dateHtml = dates.map(function(e,index){
+            var space = "0";
+            if(e.date.toString().length != 1){
+                space = "";
+            }
+            this.datesToStore.push(e.year.toString() +e.month + space + e.date);
             return (<th  key={index}>
                     <span className="dayname"> {e.month}/{e.date}{e.today} </span>
                 </th>
