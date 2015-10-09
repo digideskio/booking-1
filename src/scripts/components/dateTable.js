@@ -11,7 +11,7 @@ var DateControl = React.createClass({
             <table className="dateTable" cellPadding="0" cellSpacing="0">
                 <tbody>
                     <DateHeader date = {this.props.date} showDay = {this.props.showDay}/>
-                    <DateEventWrap/>
+                    <DateEventWrap date = {this.props.date} />
                 </tbody>
             </table>
         </div> 

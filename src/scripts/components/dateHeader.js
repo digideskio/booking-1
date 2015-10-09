@@ -1,6 +1,7 @@
 var React = require('react');
 var AppActions = require('../actions/AppActions.js');
 var UserStore = require('../stores/UserStore.js');
+var DateStore = require('../stores/DateStore.js');
 
 var DateControl = React.createClass({
     getInitialState: function() {
@@ -20,8 +21,17 @@ var DateControl = React.createClass({
             month : this.props.date.month,
             date : this.props.date.date,
             today : this.props.date.today.replace("星期", "(") + ")"
-        }
+        };
         dates.push(first);
+
+        var dateToString = function(date){
+            let space = "0";
+            if(date.date.toString().length != 1){
+                space = "";
+            }
+            return date.year.toString() + date.month + space + date.date;
+        };
+
         if(this.props.showDay){
             for(var loopIndex = 1;loopIndex<7;loopIndex++){
                 dates[loopIndex] = (function(loopIndex){
@@ -32,20 +42,26 @@ var DateControl = React.createClass({
                 }.bind(this,loopIndex)());
                 dates[loopIndex].today = dates[loopIndex].today.replace("星期", "(") + ")";
             }
-            console.log(dates);
         }
 
         var dateHtml = dates.map(function(e,index){
-            var space = "0";
-            if(e.date.toString().length != 1){
-                space = "";
+            if(this.datesToStore.length <= 6){
+                this.datesToStore.push(dateToString(e));    
+            }else if(index == 6){
+                if( dateToString(first) - this.datesToStore[0] > 0){                    
+                    if(this.datesToStore.indexOf(dateToString(e)) == -1){
+                        this.datesToStore.push(dateToString(e)); 
+                    }
+                }
             }
-            this.datesToStore.push(e.year.toString() +e.month + space + e.date);
             return (<th  key={index}>
-                    <span className="dayname"> {e.month}/{e.date}{e.today} </span>
-                </th>
-                )
+                        <span className="dayname"> {e.month}/{e.date}{e.today} </span>
+                    </th>
+                    )
+
         }, this);
+        AppActions.saveDates(this.datesToStore);
+        // console.log(DateStore.getDatesIndex());
         return dateHtml;
     },
 	render: function () {

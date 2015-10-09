@@ -22,7 +22,7 @@ var EventEmitter = require('events').EventEmitter; // 取得一個 pub/sub 廣�
 var Store = new EventEmitter();
 
 // 目前使用者的所有日期資料
-var dates= null;
+var dateKeys= [];
 
 // app 第一次啟動時，存入一包 mock data 到 localStorage 供測試
 var db = window.localStorage;
@@ -42,9 +42,9 @@ $.extend( Store, {
      * Public API
      * 供外界取得 store 內部資料
      */
-    getInfo: function(){
-        return {
-        }
+    getDatesIndex: function(){
+        // return Object.keys(dates)[0].split(",");
+        return dateKeys;
     },
 
     /**
@@ -74,11 +74,11 @@ Store.dispatchToken = AppDispatcher.register( function eventHandlers(evt){
          * 
          */
         case AppConstants.DATE_SAVE:
-				dates = action.item;
+                // for(let key in action.item){
+                //     dates[action.item]={};
+                // }
+                dateKeys = action.item;
 				break;
-
-        
-
         default:
             //
     }

@@ -30,7 +30,7 @@ var AppActionCreators = {
      */
     saveDates: function( dates ){
         AppDispatcher.handleViewAction({
-            actionType: AppConstants.SAVE,
+            actionType: AppConstants.DATE_SAVE,
             item: dates
         });
     }
