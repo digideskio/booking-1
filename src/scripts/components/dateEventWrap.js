@@ -5,12 +5,36 @@ var DateStore = require('../stores/DateStore.js');
 var DateEvent = require('../components/dateEvent.js');
 
 var DateControl = React.createClass({
-    firstDateIndex:function(){
-        var firstDate = {
-            year : this.props.date.year,
-            month : this.props.date.month,
-            date : this.props.date.date,
-            today : this.props.date.today.replace("星期", "(") + ")"
+    getDefaultProps: function () {
+        //預設 Props，確保有 Props資料，當母元件並未傳值時。
+    },
+    getInitialState: function() {
+        var firstIndex = this.transDate(this.props.date);
+        return {
+            thisWeek: this.nextFewDay(firstIndex)
+        };
+    },
+    shouldComponentUpdate : function(nextProps, nextState){
+        var nextFirstIndex = this.transDate(nextProps.date);
+        var orgWeek = DateStore.getDatesIndex();
+        if( (nextFirstIndex- orgWeek[0]) >= 0 ){
+            return true;
+        }else{
+            return false;
+        }
+    },
+    componentWillReceiveProps:function(props){
+        var firstIndex = this.transDate(props.date);
+        this.setState({
+            thisWeek: this.nextFewDay(firstIndex)
+        });
+    },
+    transDate: function(orgDate){
+        var date = {
+            year : orgDate.year,
+            month : orgDate.month,
+            date : orgDate.date,
+            today : orgDate.today.replace("星期", "(") + ")"
         };
         var dateToString = function(date){
             let space = "0";
@@ -19,15 +43,17 @@ var DateControl = React.createClass({
             }
             return date.year.toString() + date.month + space + date.date;
         };
-        var firstDate = dateToString(firstDate);
-        var firstIndex = DateStore.getDatesIndex().indexOf((firstDate));
+        return dateToString(date);
+    },
+    nextFewDay: function(index){
+        var firstIndex = DateStore.getDatesIndex().indexOf((index));
         var lastIndex = firstIndex + 7;
         var currentIndex = firstIndex - DateStore.getDatesIndex().length;
         return DateStore.getDatesIndex().slice( currentIndex, lastIndex );
     },
 	render: function () {
 
-        var dateHtml = this.firstDateIndex().map(function(e,i){
+        var dateHtml = this.state.thisWeek.map(function(e,i){
             return (
                     <DateEvent key={i} dateIndex = {e} />
                 )
