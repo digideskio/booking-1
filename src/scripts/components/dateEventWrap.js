@@ -10,17 +10,29 @@ var DateControl = React.createClass({
     },
     getInitialState: function() {
         return {
-            thisWeek: this.props.thisWeekIndex
-        };        
+            thisWeekIndex: this.props.thisWeekIndex
+        };
+    },
+    componentWillMount:function(){
+        //Ajax and Save to Store
+    },
+    componentDidMount:function(){
+        //Ajax and Save to Store
+    },
+    shouldComponentUpdate : function(nextProps, nextState){
+        console.log(nextProps.thisWeekIndex[6]);
+        //Ajax and Save to Store
+        //promse when comeBack
+        return true;
     },
     componentWillReceiveProps:function(props){
         this.setState({
-            thisWeek: props.thisWeekIndex
+            thisWeekIndex: props.thisWeekIndex
         });
     },
 	render: function () {
 
-        var dateHtml = this.state.thisWeek.map(function(e,i){
+        var dateHtml = this.state.thisWeekIndex.map(function(e,i){
             return (
                     <DateEvent key={i} dateIndex = {e} />
                 )

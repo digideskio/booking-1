@@ -24,13 +24,13 @@ var date = new Date();
 var Home = React.createClass({
     mapToday:function(index){
         var dayAry = [
+          "星期日",
           "星期一",
           "星期二",
           "星期三",
           "星期四",
           "星期五",
-          "星期六",
-          "星期日"
+          "星期六"
         ];
         if(typeof index === "string"){
             return dayAry.indexOf(index);
@@ -52,7 +52,7 @@ var Home = React.createClass({
             year: currentdate.getFullYear(),
             month: (currentdate.getMonth()+1),
             date: currentdate.getDate(),
-            today:this.mapToday(currentdate.getDay()-1)
+            today:this.mapToday(currentdate.getDay())
           }
           return date;
     },

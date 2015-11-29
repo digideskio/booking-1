@@ -4,17 +4,17 @@ var pkg = require('./package.json');
 var  buildPath = path.resolve(__dirname, 'build');
 module.exports = {
   devtool: 'eval',
-  entry: {
-    app: [
-      "webpack-dev-server/client?http://0.0.0.0:8080",
-      "webpack/hot/only-dev-server",
-      "./src/scripts/main.js"
-    ]
-  },
-  // entry: [
-  //   "webpack-hot-middleware/client",
-  //   "./src/scripts/main.js"
-  // ],
+  // entry: {
+  //   app: [
+  //     "webpack-dev-server/client?http://0.0.0.0:8080",
+  //     "webpack/hot/only-dev-server",
+  //     "./src/scripts/main.js"
+  //   ]
+  // },
+  entry: [
+    "webpack-hot-middleware/client",
+    "./src/scripts/main.js"
+  ],
   output: {
     path: buildPath,
     filename: "bundle.js",

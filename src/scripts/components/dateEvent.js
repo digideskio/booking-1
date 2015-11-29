@@ -4,6 +4,9 @@ var UserStore = require('../stores/UserStore.js');
 var DateStore = require('../stores/DateStore.js');
 
 var DateControl = React.createClass({
+    getInitialState: function() {
+        return null;
+    },
 	render: function () {
 	    return (
             <td className="col">
