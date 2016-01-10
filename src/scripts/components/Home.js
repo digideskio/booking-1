@@ -3,6 +3,7 @@ var AppActions = require('../actions/AppActions.js');
 var UserStore = require('../stores/UserStore.js');
 var DateControl = require('../components/dateControl.js');
 var DateTable = require('../components/dateTable.js');
+var classNames = require('classnames');
 
 var getAppState = function getAppState() {
     var state = {};
@@ -167,10 +168,24 @@ var Home = React.createClass({
             };
 
         }else if (opts.action == "last"){
+            var current = this.currentDate();
+
             var dayIndex = this.mapToday(this.state.date.today);
             var dateIndex =  this.state.date.date;
             var monthIndex = this.state.date.month;
             var yearIndex = this.state.date.year;
+            
+            if(current.today === this.state.date.today && 
+                current.date === this.state.date.date && 
+                 current.month === this.state.date.month &&
+                  current.year === this.state.date.year){
+                return {
+                    year : yearIndex,
+                    month : monthIndex,
+                    date : dateIndex,
+                    today : this.mapToday(dayIndex)
+                };
+            }
             
             switch (monthIndex) {
                 case 5:
@@ -268,34 +283,12 @@ var Home = React.createClass({
     },
     render: function () {
       return (
-        <div className="home">
+        <div className={classNames('home')}>
         	<div className = "wrapper">
                 <DateControl date = {this.state.date} nextDay = {this.nextDay} lastDay={this.lastDay}/>
-                <div className="time-pris">
-                    <div>
-                        <div className="tzlabel">這是備註標籤</div>
-                    </div>
-                    <div>
-                        <div className="time-pri">上午11點</div>
-                    </div>
-                    <div>
-                        <div className="time-pri">下午1點</div>
-                    </div>
-                    <div>
-                        <div className="time-pri">下午3點</div>
-                    </div>
-                    <div>
-                        <div className="time-pri">下午5點</div>
-                    </div>
-                    <div>
-                        <div className="time-pri">下午7點</div>
-                    </div>
-                    <div>
-                        <div className="time-pri">下午9點</div>
-                    </div>
-                    <div id="nowptr" className="tg-nowptr"></div>
+                <div className="dataTable">
+                    <DateTable date = {this.state.date} showDay = {this.showDay} />
                 </div>
-                <DateTable date = {this.state.date} showDay = {this.showDay} />
             </div>
         </div>
       );

@@ -36,30 +36,22 @@ var DateControl = React.createClass({
     },
     render: function () {
         return (
-            <div className="dateControl">
-                <table className="nav-table">
-                    <tbody>
-                        <tr>
-                            <td className="date-nav-today">
-                                <div className="button">今天</div>
-                            </td>
-                            <td className="date-nav-prev">
-                                <div className="navBack" onClick = {this.lastDay}>
-                                    <div className="navbutton navBack glyphicon glyphicon-menu-left"></div>
-                                </div>
-                            </td>
-                            <td className="date-nav-next">
-                                <div className="navForward" onClick = {this.nextDay}>
-                                    <div className="navbutton navForward glyphicon glyphicon-menu-right"></div>
-                                </div>
-                            </td>
-                            <td className="dateBox">
-                                <div className="currentDate">{this.state.year}年{this.state.month}月{this.state.date}日 {this.state.today}</div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>   
+            <div className="dateControl clearfix">
+
+                <h3 className="dateControl-title">今天{this.state.year}年{this.state.month}月{this.state.date}日 {this.state.today}</h3>
+
+                <span className="dateControl-comment">這是備註</span>
+
+                <div className="dateControl-handler">
+                    <a href="javascript:" className="navBack" onClick = {this.lastDay}>
+                        <span className="navbutton navBack glyphicon glyphicon-menu-left"></span>
+                    </a>
+                    <a href="javascript:" className="navForward" onClick = {this.nextDay}>
+                        <span className="navbutton navForward glyphicon glyphicon-menu-right"></span>
+                    </a>
+                </div>
+
+            </div>
     	);
     }
 });

@@ -17,14 +17,17 @@ var DateControl = React.createClass({
     },
 	render: function () {
         var dateHtml = this.state.thisWeek.map(function(e,index){
-            return (<th  key={index}>
-                        <span className="dayname"> {e.month}/{e.date}{e.today} </span>
-                    </th>
-                    )
+            return (
+                <th className="dates" key={index}>
+                    <span > {e.month}/{e.date}{e.today} </span>
+                </th>
+            );
 
         }, this);
         return (
-            <tr className="days">
+            <tr className="dataTable-table-header">
+                <th>
+                </th>
                 {dateHtml}
             </tr>
         );

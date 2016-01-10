@@ -1,5 +1,5 @@
 require('bootstrap-webpack');
-require('../assets/styles/style.sass');
+require('../assets/styles/style.scss');
 
 var mainAPP = require('./components/mainAPP.js');
 var Index = require('./components/Index.js');
@@ -24,7 +24,7 @@ var routes = (
 );
 
 Router.run(routes, Router.HashLocation, (Root) => {
-  React.render(<Root/>, document.body);
+  React.render(<Root/>, document.getElementById('root'))
 });
 
 // React.render(<App />, document.getElementById('main'));

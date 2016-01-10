@@ -40,6 +40,14 @@ var DateControl = React.createClass({
 
         return (
             <tr>
+                <td className="dataTable-table-sidebar">
+                        <div className="time-pri">上午11點</div>
+                        <div className="time-pri">下午1點</div>
+                        <div className="time-pri">下午3點</div>
+                        <div className="time-pri">下午5點</div>
+                        <div className="time-pri">下午7點</div>
+                        <div className="time-pri">下午9點</div>
+                </td>
                 {dateHtml}
             </tr>
         );

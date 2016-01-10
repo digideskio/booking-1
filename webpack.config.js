@@ -18,7 +18,7 @@ module.exports = {
   output: {
     path: buildPath,
     filename: "bundle.js",
-    publicPath: '/'
+    publicPath: '/build'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -46,7 +46,7 @@ module.exports = {
       },
 
       {
-        test: /\.sass$/,
+        test: /\.scss$/,
         loader: "style!css!sass?indentedSyntax=false&outputStyle=expanded"
       },
 

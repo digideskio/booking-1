@@ -29,29 +29,15 @@ var Index = React.createClass({
 	},
 	render: function () {
 	return (
-		<div className='container-fluid text-center index'>
-		    <div className="row">
-		        <div className="col-xs-4 col-xs-offset-4 logo">
-		    		<h2 >Index</h2>
-	    		</div>
-		    </div>
-		    <div className='row'>
-		        <div className="col-xs-4 col-xs-offset-4 name">
-		        <span>姓名：</span>
-		        	<input type='text' value={this.state.name} onChange={this.handleNameChange} className='nameInput' />
-	    		</div>
-		    </div>
-		    <div className='row'>
-		        <div className="col-xs-4 col-xs-offset-4 phone">
-		        <span>電話：</span>
-	    			<input type='text' value={this.state.phone} onChange={this.handlePhoneChange} className='phoneInput' />
-	    		</div>
-		    </div>
-			<div className='row'>
-		        <div className="col-xs-4 col-xs-offset-4 logo">
-		        	<Link to="home" onClick={this.login} >Login</Link>
-	    		</div>
-	    	</div>
+		<div className='index'>
+			<div className='form'>
+	    		<h2 className='form-title'>Please sign in</h2>
+	    		<span className='form-outline'>姓名：</span>
+	    		<input className='form-input input-name' type='text' value={this.state.name} onChange={this.handleNameChange} />
+	        	<span className='form-outline'>電話：</span>
+				<input className='form-input input-phone' type='text' value={this.state.phone} onChange={this.handlePhoneChange} />
+	        	<Link className='form-submit btn btn-lg btn-primary btn-block' to="home" onClick={this.login} >Login</Link>
+			</div>
 		</div>
 		);
 	}

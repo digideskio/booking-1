@@ -84,14 +84,14 @@ var DateControl = React.createClass({
     },   
 	render: function () {
         return (
-        <div className="topContainerDate">
-            <table className="dateTable" cellPadding="0" cellSpacing="0">
+            <table className="dataTable-table" cellPadding="0" cellSpacing="0">
+                <thead>
+                  <DateHeader thisWeek = {this.state.thisWeek} />
+                </thead> 
                 <tbody>
-                    <DateHeader thisWeek = {this.state.thisWeek} />
                     <DateEventWrap thisWeekIndex = {this.state.thisWeekIndex} />
                 </tbody>
             </table>
-        </div> 
         );
 	}
 });

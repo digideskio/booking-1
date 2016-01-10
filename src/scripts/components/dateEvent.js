@@ -8,26 +8,16 @@ var DateControl = React.createClass({
         return null;
     },
 	render: function () {
+        var html = Array.apply(null,Array(6)).map(function(e,index){
+            return (
+                <div key={index} className="dateEvent">
+                    <div className="">{this.props.dateIndex}</div>
+                </div>
+            );
+        },this);
 	    return (
-            <td className="col">
-                <div className="eventwrapper">
-                    <div className="gutter">{this.props.dateIndex}</div>
-                </div>
-                <div className="eventwrapper">
-                    <div className="gutter">{this.props.dateIndex}</div>
-                </div>
-                <div className="eventwrapper">
-                    <div className="gutter">{this.props.dateIndex}</div>
-                </div>
-                <div className="eventwrapper">
-                    <div className="gutter">{this.props.dateIndex}</div>
-                </div>
-                <div className="eventwrapper">
-                    <div className="gutter">{this.props.dateIndex}</div>
-                </div>
-                <div className="eventwrapper">
-                    <div className="gutter">{this.props.dateIndex}</div>
-                </div>                                
+            <td className="dataTable-table-content">
+                {html}                               
             </td>
     	);
 	}

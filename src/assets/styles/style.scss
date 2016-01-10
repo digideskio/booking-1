@@ -1,0 +1,143 @@
+/*--------------------------------------
+        GLOBALS & GENERAL CASES
+---------------------------------------*/
+a {
+  outline: 0;
+  text-decoration: none;
+}
+
+.clearfix {
+	zoom:1;
+	&:after {
+		content:'.';
+		display:block;
+		clear:both;
+		visibility:hidden;
+		height:0;
+		font-size:0;
+	}
+}
+
+/*--------------------------------------
+    TYPOGRAPHY : font-size 1rem = 10px 
+---------------------------------------*/
+html {
+	font-size: 62.5%;
+	min-width: 320px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.6rem;
+}
+
+h3 {
+  font-size: 2rem;
+}
+
+h4 {
+  font-size: 1.8rem;
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+body {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    background-color: #eee;
+}
+
+.wrapper {
+	min-height: 100%;
+    max-width: 730px;
+	position: relative;
+	overflow: hidden;
+    padding: 0 25px;
+    margin: 0 auto;
+}
+
+.index {
+    max-width: 330px;
+    padding: 15px;
+    margin: 0 auto;
+    .form {
+    	&-title {
+	    	margin-bottom: 10px;
+    	}
+
+    	&-outline {
+	        display: block;
+            font-weight: 700;
+    	}
+
+    	&-input {
+		    width: 100%;
+		    padding: 10px;
+		    border: 1px solid #ccc;
+		    border-radius: 4px;
+    	}
+
+    	&-submit {
+    		margin-top: 10px;
+    	}
+    }
+}
+
+
+.home {	
+	.dateControl {
+		text-align: center;
+		&-title {
+			
+		}
+
+		&-comment {
+			float: left;
+		}
+
+		&-handler {
+			float: right;
+		}
+	}
+
+	.dataTable {
+		margin-top: 20px;
+		&-table {
+			width: 100%;
+			margin: 0 auto;
+
+			tbody:before {
+			    content: "-";
+			    display: block;
+			    line-height: 1em;
+			    color: transparent;
+			}
+
+			&-header {
+				.dates{
+					text-align: center;
+				}	
+			}
+
+			&-sidebar {
+				width: 100%;
+				float: left;
+				.time-pri{
+					height:30px;
+				}
+			}
+
+			&-content {
+				text-align: center;
+				.dateEvent {
+					height:30px;
+				}
+			}
+		}
+	}
+}
