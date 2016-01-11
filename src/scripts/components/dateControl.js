@@ -44,10 +44,10 @@ var DateControl = React.createClass({
 
                 <div className="dateControl-handler">
                     <a href="javascript:" className="navBack" onClick = {this.lastDay}>
-                        <span className="navbutton navBack glyphicon glyphicon-menu-left"></span>
+                        <span className="glyphicon glyphicon-menu-left"></span>
                     </a>
                     <a href="javascript:" className="navForward" onClick = {this.nextDay}>
-                        <span className="navbutton navForward glyphicon glyphicon-menu-right"></span>
+                        <span className="glyphicon glyphicon-menu-right"></span>
                     </a>
                 </div>
 
